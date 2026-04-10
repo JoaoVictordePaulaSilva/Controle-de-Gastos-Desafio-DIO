@@ -1,9 +1,11 @@
 package com.joaovictor.controller;
 
 import com.joaovictor.model.Gasto;
-import com.joaovictor.repository.GastoRepository;
+import com.joaovictor.service.GastoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,17 +19,19 @@ import java.util.List;
 // Ou seja, acessará tudo através de http://localhost:8080/gastos
 public class GastoController {
 
-    @Autowired// Esta é a "Injeção de Dependência". Você está dizendo ao Spring:
-    // "Ei, pegue aquela interface GastoRepository que eu criei e coloque uma instância dela aqui para eu usar"
-    private GastoRepository repository;
+    @Autowired
+    private GastoService service;
 
-    @GetMapping//Define que, quando alguém acessar a URL via método GET, o Spring deve listar todos os gastos.
+    @GetMapping
     public List<Gasto> getAllGastos() {
-        return repository.findAll();
+        return service.listarTodos();
     }
-    @PostMapping// Define que, quando alguém enviar dados via POST, o Spring deve salvar esses dados no banco.
-    public Gasto salvar(@RequestBody Gasto gasto) { // Diz ao Java para transformar o JSON que vem na requisição
-        // em um objeto do tipo Gasto automaticamente.
-        return repository.save(gasto);
+    @PostMapping
+    public Gasto salvar(@RequestBody Gasto gasto) {
+        return service.salvarGasto(gasto);
+    }
+    @DeleteMapping("/{id}")
+    public void excluir(@PathVariable Long id) {
+        service.excluir(id);
     }
 }

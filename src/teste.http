@@ -7,3 +7,6 @@ Content-Type: application/json
   "valor": 35.50,
   "categoria": "Alimentação"
 }
+
+### Teste de Exclusão (Soft Delete)
+DELETE http://localhost:8080/gastos/1

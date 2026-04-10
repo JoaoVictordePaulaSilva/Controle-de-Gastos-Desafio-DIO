@@ -17,5 +17,7 @@ public class Gasto {
     private String descricao;
     private Double valor;
     private String categoria;
+
+    private boolean ativo = true;
 }
 
