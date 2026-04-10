@@ -1,0 +1,9 @@
+### Teste de Cadastro de Gasto
+POST http://localhost:8080/gastos
+Content-Type: application/json
+
+{
+  "descricao": "Lanche Mackenzie",
+  "valor": 35.50,
+  "categoria": "Alimentação"
+}
