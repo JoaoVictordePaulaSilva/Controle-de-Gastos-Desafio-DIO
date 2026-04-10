@@ -18,6 +18,9 @@ public class GastoService {
     }
 
     public Gasto salvarGasto(Gasto gasto){
+        if (gasto.getValor() == null || gasto.getValor() <= 0) {
+            throw new RuntimeException("Valor do gasto deve ser maior que zero");
+        }
         return repository.save(gasto);
     }
 
